@@ -4,6 +4,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -12,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 /**
@@ -30,52 +34,25 @@ public class PhotoChoose extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 		
-		StringBuilder sb = new StringBuilder();
+		List<Part> imageFile = new LinkedList();
+		
     for (Part part : request.getParts()) {
       if (part.getName().equals("imagedata")) {
-          String name = getFilename(part);
-          part.write(name);
-          sb.append(name).append("<br>");
-      }
+      	imageFile.add(part);
+      }	
+    }
     
-    part.write(getServletContext().getRealPath(File.separator + "WEB-INF" + File.separator + "uploadFile") + File.separator + name);
-		File imageFile;
-		
-		File image;
-		BufferedImage b;
-		try {
-			b = ImageIO.read(image);
-		} catch (IOException e1) {
-			return;
-		}
-		int ww=b.getWidth();
-		int hh=b.getHeight();
-		
-		BufferedImage b2=new BufferedImage(ww,hh,BufferedImage.TYPE_INT_RGB);
-		Graphics g2=b2.getGraphics();
-		g2.drawImage(b,0,0,null);
-		g2.dispose();
-		
-		try {
-			ImageIO.write(b2, extension, resultImage);
-		} catch (IOException e) {
-			return;
-		}
+    HttpSession session = request.getSession();
+    session.setAttribute("ImageFile", imageFile);
+    
 	}
 	
 	private String getFilename(Part part) {
