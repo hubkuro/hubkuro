@@ -1,12 +1,9 @@
 package upload;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -22,48 +19,41 @@ import javax.servlet.http.Part;
  * Servlet implementation class PhotoChoose
  */
 @WebServlet("/upload/photo")
-@MultipartConfig(maxFileSize=1048576)
+@MultipartConfig(maxFileSize = 1048576)
 public class PhotoChoose extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PhotoChoose() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public PhotoChoose() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		List<Part> imageFile = new LinkedList();
-		
-    for (Part part : request.getParts()) {
-      if (part.getName().equals("imagedata")) {
-      	imageFile.add(part);
-      }	
-    }
-    
-    HttpSession session = request.getSession();
-    session.setAttribute("ImageFile", imageFile);
-    
-	}
-	
-	private String getFilename(Part part) {
-    for (String cd : part.getHeader("Content-Disposition").split(";")) {
-      if (cd.trim().startsWith("filename")) {
-          return cd.substring(cd.indexOf('=') + 1).trim()
-                  .replace("\"", "");
-      }
-  }
 
-  return null;
-}
+		List<Part> imageFile = new LinkedList<Part>();
+		int fileSize = 0;
+		for (Part part : request.getParts()) {
+			if (part.getName().equals("imagedata")) {
+				if (Objects.nonNull(ImageIO.read(part.getInputStream()))) {
+					imageFile.add(part);
+					fileSize += part.getSize();
+				}
+			}
+			if (fileSize > 15728640) {
+				return;
+			}
+		}
+		HttpSession session = request.getSession();
+		session.setAttribute("ImageFile", imageFile);
+
+	}
 
 }
