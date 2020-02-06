@@ -66,7 +66,9 @@ public class FileSave extends HttpServlet {
 		}
 
 		session.invalidate();
+		
 
+		response.sendRedirect("/upload/submit/completed");
 	}
 
 	private String Calculation(String expriration) {

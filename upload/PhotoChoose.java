@@ -51,9 +51,17 @@ public class PhotoChoose extends HttpServlet {
 				return;
 			}
 		}
+
 		HttpSession session = request.getSession();
+		
+		if(Objects.nonNull(request.getParameter("auto"))) {
+			RandomPassSet rps = new RandomPassSet();
+			session.setAttribute("pass", rps.Set());
+		}
+		
 		session.setAttribute("ImageFile", imageFile);
 
+		response.sendRedirect("/upload/pass");
 	}
 
 }
