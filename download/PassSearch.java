@@ -1,6 +1,8 @@
 package download;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,6 +39,7 @@ public class PassSearch extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		HttpSession session = request.getSession();
 		String str_pass = request.getParameter("pass");
 
 		DownloadDAO inst = new DownloadDAO();
@@ -59,12 +62,11 @@ public class PassSearch extends HttpServlet {
 		};
 
 		// listFilesメソッドを使用して一覧を取得する
-		File[] list_hai = new File("C:\\Users\\183106\\eclipse-workspace\\passconfirm\\WebContent\\WEB-INF\\uploadFile")
-				.listFiles(filter);
+		LinkedList<String> list_hai = new LinkedList<String>();
+		Arrays.stream(new File("WEB-INF" + File.pathSeparator + "uploadFile").listFiles(filter)).forEach(s -> list_hai.add("WEB-INF" + File.pathSeparator + "uploadFile" + s.getName()));
 		
-		request.setAttribute("",list_hai[0]);
+		request.setAttribute("imageList",list_hai.get(0));
 		
-		HttpSession session = request.getSession();
 		session.setAttribute("pass", pass);
 		
 		response.sendRedirect("/download/inbox");

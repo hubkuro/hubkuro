@@ -49,22 +49,6 @@ public class FileSave extends HttpServlet {
 		UploadDAO instA=new UploadDAO();
 		System.out.println(expiration);
 		instA.add(pass, Calculation(expiration));//有効期限計算＆DBに追加
-		StringBuilder fileName = new StringBuilder();
-		fileName.append("WEB-INF/uploadFile/");
-		fileName.append(pass);
-
-
-		List<Part> imageList = (LinkedList<Part>) session.getAttribute("imagedata");
-
-		for(Part image : imageList) {
-
-			try {
-				image.write(fileName.toString() + File.pathSeparator + getFilename(image));
-			} catch (IOException e) {
-				System.out.println("ファイルにアクセスできません。");
-			}
-		}
-
 		session.invalidate();
 		
 
@@ -92,15 +76,6 @@ public class FileSave extends HttpServlet {
 				return ans;
 	}
 
-	private String getFilename(Part part) {
-	    for (String cd : part.getHeader("Content-Disposition").split(";")) {
-	      if (cd.trim().startsWith("filename")) {
-	          return cd.substring(cd.indexOf('=') + 1).trim()
-	                  .replace("\"", "");
-	      }
-	  }
-
-	  return null;
-	}
+	
 
 }

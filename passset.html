@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	パスワードを設定してください
+	<br>
+	<form action="confirm" method="post">
+		<input type="text" onInput="alertValue(this.value)" id="pass" name="pass" maxlength="10"><br>
+		<input type="text" name="dummy" style="display:none;"> 
+		<input type="button" id="sub" value="決定" onclick="submit();" disabled="disabled">
+		<script type="text/javascript" >
+		<!--
+			function alertValue(input_message) {
+				var pattern = /^[a-zA-Z0-9_]{6,10}$/;
+				if (pattern.test(input_message)) {
+					document.getElementById("sub").disabled = false;
+				}
+			}
+			-->
+		</script>
+	</form>
+</body>
+</html>

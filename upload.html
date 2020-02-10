@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form  action="upload/photo" method="post" enctype="multipart/form-data">
+<p>
+<input type="file" onchange="OnFileSelect(this)" name="imagedate" multiple="multiple" accept="image/jpeg,image/png,image/bmp,image/gif">
+</p>
+<p>
+<input type="submit" id="manual" name="manual" value="送信" disabled="disabled">
+</p>
+<p>
+<input type="checkbox" id="auto" name="auto" >パスワードを指定しない
+</p>
+</form>
+<script type="text/javascript" >
+<!--
+function OnFileSelect( inputElement ){
+  // ファイルリストの獲得
+  var fileList = inputElement.files;
+  //ファイルの数を獲得
+  var fileCount = fileList.length;
+  var total_saize=0;
+  for (var i = 0; i < fileCount; i++){
+    var file = fileList[i];
+    total_saize += file.size;
+  }
+  if (15000000 < total_saize){
+    alert('一度にアップできる容量を超えました');
+  } else{
+     document.getElementById("manual").disabled = false;
+  }
+}
+-->
+</script>
+</body>
+</html>
