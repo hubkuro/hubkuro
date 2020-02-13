@@ -18,7 +18,6 @@ import java.io.FilenameFilter;
 /**
  * Servlet implementation class PassSearch
  */
-@WebServlet("/download/pass/search")
 public class PassSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

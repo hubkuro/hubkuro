@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 /**
  * Servlet implementation class PassConfirm
  */
-@WebServlet("/upload/Confirm")
 public class submitConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

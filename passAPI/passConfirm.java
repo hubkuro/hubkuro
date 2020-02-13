@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,6 @@ import mySQLConection.PassDAO;
 /**
  * Servlet implementation class passConfirm
  */
-@WebServlet("/api/upload/pass/Confirm")
 public class passConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,9 +32,10 @@ public class passConfirm extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("接続がありました。");
+		String ress = null;
 		if(request.getParameter("pass") instanceof String) {
 			String pass = request.getParameter("pass");
-			String ress;
 			Map<String, String> resMap = new HashMap<>();
 			if(pass.matches("[a-zA-Z0-9_]{6,10}")) {
 				PassDAO pdao = new PassDAO();
@@ -54,12 +53,12 @@ public class passConfirm extends HttpServlet {
 				resMap.put("ret", "False");
 				ress = this.mapToJson(resMap);
 			}
-			response.setContentType("application/json");
-			response.setHeader("Cache-Control", "nocache");
-			response.setCharacterEncoding("utf-8");
-			PrintWriter out = response.getWriter();
-			out.print(ress);
 		}
+		response.setContentType("application/json");
+		response.setHeader("Cache-Control", "nocache");
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(ress);
 		
 	}
 	

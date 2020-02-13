@@ -24,7 +24,7 @@ public class UploadDAO {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			try (Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/sampledb?serverTimezone=JST",
+					"jdbc:mysql://localhost:3306/hubkuro?serverTimezone=JST",
 					"root", "root");
 					Statement stmt = conn.createStatement();
 					ResultSet rs = stmt
