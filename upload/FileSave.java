@@ -17,6 +17,7 @@ import mySQLConection.UploadDAO;
 /**
  * Servlet implementation class FileSave
  */
+@WebServlet("/upload/save")
 public class FileSave extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -4,16 +4,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+body{background: black}
+</style>
 <body>
-<form  action="upload/photo" method="post" enctype="multipart/form-data">
+<img src="upload/a.png">
+<form  action="/hubkuro/upload/photo" method="post" enctype="multipart/form-data">
 <p>
 <input type="file" onchange="OnFileSelect(this)" name="imagedate" multiple="multiple" accept="image/jpeg,image/png,image/bmp,image/gif">
 </p>
+
 <p>
-<input type="submit" id="manual" name="manual" value="送信" disabled="disabled">
+<input type="image" id="manual" name="manual" value="送信" disabled="disabled" src="upload/b.png">
 </p>
 <p>
-<input type="checkbox" id="auto" name="auto" >パスワードを指定しない
+<input type="checkbox" id="auto" name="auto" ><font color="white">パスワードを指定しない</font>
 </p>
 </form>
 <script type="text/javascript" >

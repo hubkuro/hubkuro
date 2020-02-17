@@ -18,6 +18,7 @@ import javax.servlet.http.Part;
 /**
  * Servlet implementation class PhotoChoose
  */
+@WebServlet("/upload/photo")
 @MultipartConfig(maxFileSize = 15728640)
 public class PhotoChoose extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -53,15 +54,16 @@ public class PhotoChoose extends HttpServlet {
 		}
 
 		HttpSession session = request.getSession();
+		session.setAttribute("ImageFile", imageFile);
 		
 		if(Objects.nonNull(request.getParameter("auto"))) {
 			RandomPassSet rps = new RandomPassSet();
 			session.setAttribute("pass", rps.Set());
+			response.sendRedirect("/hubkuro/Confirm.html");
+			return;
 		}
 		
-		session.setAttribute("ImageFile", imageFile);
-
-		response.sendRedirect("/upload/pass");
+		response.sendRedirect("/hubkuro/passset.html");
 	}
 
 }

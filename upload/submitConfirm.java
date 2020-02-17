@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 /**
  * Servlet implementation class PassConfirm
  */
+@WebServlet("/upload/content/Confirm")
 public class submitConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +29,7 @@ public class submitConfirm extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		System.out.println("せつぞくあり");
 		String str_pass=request.getParameter("pass");
 		String str_expiration=request.getParameter("expiration");
 		
@@ -45,6 +46,7 @@ public class submitConfirm extends HttpServlet {
 				fileName.append(pass);
 
 
+				@SuppressWarnings("unchecked")
 				List<Part> imageList = (LinkedList<Part>) session.getAttribute("imagedata");
 
 				for(Part image : imageList) {

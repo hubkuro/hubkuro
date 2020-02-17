@@ -8,44 +8,10 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
-    <welcome-file>home.html</welcome-file>
-    <welcome-file>upload.htm</welcome-file>
-    <welcome-file>passet.html</welcome-file>    
+    <welcome-file>/hubkuro/home.html</welcome-file>
+    <welcome-file>/hubkuro/WebContent/upload.htm</welcome-file>
+    <welcome-file>/hubkuro/WebContent/passet.html</welcome-file>    
   </welcome-file-list>
-  <servlet>
-
-  	<servlet-name>PhotoC</servlet-name>
-  	<servlet-class>upload.PhotoChoose</servlet-class>
-
-
-  </servlet>
-  <servlet>
-
-  	<servlet-name>submitC</servlet-name>
-  	<servlet-class>upload.submitConfirm</servlet-class>
-
-
-  </servlet>
-  
-  <servlet>
-
-  	<servlet-name>FileS</servlet-name>
-  	<servlet-class>upload.FileSave</servlet-class>
-
-  </servlet>
-  
-  <servlet>
-
-  	<servlet-name>PassS</servlet-name>
-  	<servlet-class>download.PassSearch</servlet-class>
-
-  </servlet>
-  
-  <servlet>
-  	<servlet-name>inboxC</servlet-name>
-  	<servlet-class>download.inboxCompleted</servlet-class>
-  
-  </servlet>
   <servlet>
   	<servlet-name>DownloadCj</servlet-name>
   	<servlet-class>DownloadConfirm.jsp</servlet-class>
@@ -54,7 +20,7 @@
 
   <servlet>
   	<servlet-name>passInput</servlet-name>
-  	<servlet-class>passInput.html</servlet-class>
+  	<servlet-class>/hubkuro/WebContent/passInput.html</servlet-class>
   
   </servlet>
   
@@ -79,28 +45,18 @@
   
   <servlet>
   	<servlet-name>passSeth</servlet-name>
-  	<servlet-class>upload.html</servlet-class>
+  	<servlet-class>/hubkuro/WebContent/passset.html</servlet-class>
   
   </servlet>
   <servlet>
   	<servlet-name>Index</servlet-name>
-  	<servlet-class>home.html</servlet-class>
-  
-  </servlet>
-  
-  <servlet>
-  	<servlet-name>passApi</servlet-name>
-  	<servlet-class>passConfirm</servlet-class>
+  	<servlet-class>/hubkuro/home.html</servlet-class>
   
   </servlet>
   <servlet-mapping>
   	<servlet-name>Index</servlet-name>
   	<url-pattern>/</url-pattern>
    </servlet-mapping>
-   <servlet-mapping>
-    <servlet-name>FileS</servlet-name>
-    <url-pattern>/upload/save</url-pattern>
-  </servlet-mapping>
 
   <servlet-mapping>
   	<servlet-name>passInput</servlet-name>
@@ -118,30 +74,6 @@
   </servlet-mapping>
   
   <servlet-mapping>
-  	<servlet-name>PhotoC</servlet-name>
-  	<url-pattern>/upload/photo</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-
-  <servlet-name>submitC</servlet-name>
-  <url-pattern>/upload/content/Confirm</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-
-  <servlet-name>PassS</servlet-name>
-  <url-pattern>/download/pass/search</url-pattern>
-
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  <servlet-name>inboxC</servlet-name>
-  <url-pattern>/download/Completed</url-pattern>
-  
-  </servlet-mapping>
-  
-  <servlet-mapping>
 
   <servlet-name>uploadh</servlet-name>
   <url-pattern>/upload</url-pattern>
@@ -151,10 +83,6 @@
   <servlet-mapping>
   <servlet-name>passSeth</servlet-name>
   <url-pattern>/upload/pass</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  <servlet-name>passApi</servlet-name>
-  <url-pattern>/api/upload/pass/Confirm</url-pattern>
   </servlet-mapping>
   
 </web-app>

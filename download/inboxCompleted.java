@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class InBox
  */
+@WebServlet("/download/Completed")
 public class inboxCompleted extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
