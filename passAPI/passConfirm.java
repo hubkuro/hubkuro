@@ -17,13 +17,13 @@ import mySQLConection.PassDAO;
  * Servlet implementation class passConfirm
  */
 @WebServlet("/api/upload/pass/Confirm")
-public class passConfirm extends HttpServlet {
+public class PassConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public passConfirm() {
+    public PassConfirm() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -53,16 +53,16 @@ public class PhotoChoose extends HttpServlet {
 			}
 		}
 
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 		session.setAttribute("ImageFile", imageFile);
-		
+
 		if(Objects.nonNull(request.getParameter("auto"))) {
 			RandomPassSet rps = new RandomPassSet();
 			session.setAttribute("pass", rps.Set());
 			response.sendRedirect("/hubkuro/Confirm.html");
 			return;
 		}
-		
+
 		response.sendRedirect("/hubkuro/passset.html");
 	}
 

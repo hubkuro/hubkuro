@@ -1,5 +1,6 @@
 package upload;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,7 +46,23 @@ public class FileSave extends HttpServlet {
 		System.out.println(expiration);
 		instA.add(pass, Calculation(expiration));//有効期限計算＆DBに追加
 		session.invalidate();
-		
+
+		StringBuilder upFileName = new StringBuilder();
+		upFileName.append("WEB-INF");
+		upFileName.append(File.separator);
+		upFileName.append("uploadFile");
+		upFileName.append(File.separator);
+		upFileName.append(pass);
+
+		StringBuilder tpFileName = new StringBuilder();
+		tpFileName.append("WEB-INF");
+		tpFileName.append(File.separator);
+		tpFileName.append("tempFile");
+		tpFileName.append(File.separator);
+		tpFileName.append(pass);
+
+		File srcFile = new File(upFileName.toString());
+		srcFile.renameTo(new File(tpFileName.toString()));
 
 		response.sendRedirect("/upload/submit/completed");
 	}
@@ -71,6 +88,6 @@ public class FileSave extends HttpServlet {
 				return ans;
 	}
 
-	
+
 
 }

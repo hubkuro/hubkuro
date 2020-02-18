@@ -3,6 +3,11 @@ package upload;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,11 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Servlet implementation class PassConfirm
@@ -32,23 +32,24 @@ public class submitConfirm extends HttpServlet {
 		System.out.println("せつぞくあり");
 		String str_pass=request.getParameter("pass");
 		String str_expiration=request.getParameter("expiration");
-		
-			
+
+
 			if(Pattern.matches("^[0-9a-zA-Z]+$", str_pass)) {
 				//OK
 				HttpSession session = request.getSession();
 				session.setAttribute("pass",str_pass );//passをセッションに追加
 				session.setAttribute("expiration", str_expiration);//有効期限をセッションに追加
-				response.sendRedirect("/upload/Confirm");
 				String pass=(String)session.getAttribute("pass");
 				StringBuilder fileName = new StringBuilder();
-				fileName.append("WEB-INF/uploadFile/");
+				fileName.append("WEB-INF/tempFile/");
 				fileName.append(pass);
 
 
 				@SuppressWarnings("unchecked")
-				List<Part> imageList = (LinkedList<Part>) session.getAttribute("imagedata");
-
+				List<Part> imageList = (LinkedList<Part>) session.getAttribute("ImageFile");
+				if(imageList == null) {
+					System.out.println("nullです");
+				}
 				for(Part image : imageList) {
 
 					try {
@@ -57,7 +58,7 @@ public class submitConfirm extends HttpServlet {
 						System.out.println("ファイルにアクセスできません。");
 					}
 				}
-				
+
 				FilenameFilter filter = new FilenameFilter() {
 					@Override
 					public boolean accept(File file, String str) {
@@ -70,20 +71,21 @@ public class submitConfirm extends HttpServlet {
 						}
 					}
 				};
-				
+
 				// listFilesメソッドを使用して一覧を取得する
 				LinkedList<String> list_hai = new LinkedList<String>();
 				Arrays.stream(new File("WEB-INF" + File.pathSeparator + "uploadFile").listFiles(filter)).forEach(s -> list_hai.add("WEB-INF" + File.pathSeparator + "uploadFile" + s.getName()));
-				
+
 				request.setAttribute("imageList",list_hai.get(0));
 
-				
+				response.sendRedirect("/hubkuro/Confirm.html");
+
 			}else {
 				//ダメ
 				response.sendRedirect("/upload/pass");
 			}
-			
-			
+
+
 	}
 	private String getFilename(Part part) {
     for (String cd : part.getHeader("Content-Disposition").split(";")) {
